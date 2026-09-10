@@ -1,0 +1,352 @@
+/* ============================================
+   مدينة النور - Light City Game
+   Global Styles & Visual Foundation
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background: #000;
+}
+
+/* ============================================
+   COLOR PALETTE
+   ============================================ */
+
+:root {
+    /* Bright Joyful Colors */
+    --sunny-yellow: #FFD93D;
+    --warm-orange: #FF9F1C;
+    --coral: #FF6B6B;
+    --turquoise: #1DD1A1;
+    --sky-blue: #00D4FF;
+    --vivid-blue: #0099FF;
+    --fresh-green: #2ECC71;
+    --pink-accent: #FF69B4;
+    --warm-cream: #FFF8E7;
+    --bright-white: #FFFFFF;
+    
+    /* Darker tones for contrast */
+    --dark-navy: #1A1A2E;
+    --dark-purple: #2D1B4E;
+    --deep-forest: #1B4332;
+    
+    /* Neutral */
+    --shadow-black: #0A0A0A;
+    --soft-gray: #E8E8E8;
+}
+
+/* ============================================
+   GAME CONTAINER & MAIN LAYOUT
+   ============================================ */
+
+#game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+}
+
+#scene-manager {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   UI LAYER
+   ============================================ */
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+#message-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: auto;
+}
+
+.message-text {
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--bright-white);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6),
+                 -2px -2px 8px rgba(255, 255, 255, 0.1);
+    margin: 0;
+    line-height: 1.4;
+    max-width: 80%;
+    animation: messageAppear 0.8s ease-out forwards;
+    letter-spacing: 0.05em;
+}
+
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.message-text.discovery {
+    color: var(--sunny-yellow);
+    font-size: 2rem;
+    animation: discoveryPulse 0.6s ease-out;
+}
+
+@keyframes discoveryPulse {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+#controls-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    pointer-events: auto;
+    z-index: 500;
+}
+
+/* ============================================
+   INTERACTIVE BUTTONS
+   ============================================ */
+
+.game-button {
+    padding: 16px 32px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    color: var(--bright-white);
+}
+
+.game-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.4s ease;
+}
+
+.game-button:hover::before {
+    left: 100%;
+}
+
+.game-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.game-button:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button-primary {
+    background: linear-gradient(135deg, var(--sunny-yellow), var(--warm-orange));
+    color: var(--dark-navy);
+    text-shadow: none;
+}
+
+.button-secondary {
+    background: linear-gradient(135deg, var(--sky-blue), var(--vivid-blue));
+    color: var(--bright-white);
+}
+
+.button-success {
+    background: linear-gradient(135deg, var(--turquoise), var(--fresh-green));
+    color: var(--dark-navy);
+}
+
+.button-small {
+    padding: 12px 24px;
+    font-size: 1rem;
+}
+
+/* ============================================
+   INTERACTIVE ELEMENTS
+   ============================================ */
+
+.draggable-object {
+    cursor: grab;
+    transition: filter 0.2s ease;
+}
+
+.draggable-object:hover {
+    filter: drop-shadow(0 0 12px rgba(255, 200, 0, 0.6));
+}
+
+.draggable-object:active {
+    cursor: grabbing;
+}
+
+.drop-zone {
+    position: relative;
+    border: 3px dashed rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.drop-zone.hover {
+    border-color: var(--sunny-yellow);
+    background: rgba(255, 217, 61, 0.15);
+    box-shadow: 0 0 20px rgba(255, 217, 61, 0.4);
+}
+
+.drop-zone.success {
+    border-color: var(--turquoise);
+    background: rgba(29, 209, 161, 0.15);
+    box-shadow: 0 0 20px rgba(29, 209, 161, 0.4);
+    animation: successGlow 0.6s ease;
+}
+
+@keyframes successGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(29, 209, 161, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(29, 209, 161, 0.7);
+    }
+}
+
+/* ============================================
+   PARTICLE EFFECTS
+   ============================================ */
+
+.particle {
+    position: absolute;
+    pointer-events: none;
+}
+
+.particle-light {
+    width: 4px;
+    height: 4px;
+    background: var(--sunny-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--sunny-yellow);
+    animation: particleFloat 2s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty));
+    }
+}
+
+/* ============================================
+   RESPONSIVE & ACCESSIBILITY
+   ============================================ */
+
+@media (max-width: 768px) {
+    .message-text {
+        font-size: 1.8rem;
+    }
+    
+    .game-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+
+.loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top: 4px solid var(--sunny-yellow);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* ============================================
+   SCROLL & TEXT SELECTION
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sunny-yellow);
+    border-radius: 4px;
+}
+
+::selection {
+    background: var(--sunny-yellow);
+    color: var(--dark-navy);
+}
