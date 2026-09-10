@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدينة النور</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Scene Management -->
+        <div id="scene-manager"></div>
+        
+        <!-- Global UI Container -->
+        <div id="ui-layer">
+            <div id="message-display"></div>
+            <div id="controls-container"></div>
+        </div>
+    </div>
+
+    <!-- Audio Context for Web Audio API -->
+    <div id="audio-context" style="display: none;"></div>
+
+    <!-- Main Game Script -->
+    <script src="js/audio.js"></script>
+    <script src="js/graphics.js"></script>
+    <script src="js/scenes/scene1-arrival.js"></script>
+    <script src="js/scenes/scene2-discovery.js"></script>
+    <script src="js/scenes/scene3-synthesis.js"></script>
+    <script src="js/scenes/scene4-classification.js"></script>
+    <script src="js/scenes/scene5-festival.js"></script>
+    <script src="js/game-engine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
